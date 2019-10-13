@@ -3,3 +3,5 @@
 
 a = [rand(50), rand(50), rand(50), rand(50), rand(50), rand(50), rand(50), rand(50), rand(50), rand(50), rand(50)]
 
+puts "Start array: " + a.to_s
+puts "Result:      " + a.rotate(1).to_s
