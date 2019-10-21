@@ -83,7 +83,7 @@ class Cat
     else
       @asleep = true
       @health += 1 if @health < 10
-      puts 'Вы уложили ' + @name + '(у) спать....'
+      puts 'Вы уложили ' + @name + ' спать....'
       timeleft
     end
   end
@@ -110,11 +110,11 @@ class Cat
 
   def wakeUp
     if @asleep
-      puts @name + ' уже спит.'  
-    else
       @asleep = false
       puts 'Вы разбудили ' + @name + '.'
-      timeleft
+      timeleft  
+    else
+      puts @name + ' не спит.'
     end
   end
 
@@ -125,7 +125,6 @@ class Cat
     @mood -= 1
     timeleft
    end
-
 
   private
 
@@ -159,13 +158,6 @@ class Cat
     else
      @wsleep -= 3
       puts @name + ' ритмично сопит.'
-      @sleepCount += 1
-      if @sleepCount >= 3
-        @asleep = false
-        puts 'Ваш питомец проснулся и хочет кушать.'
-        @eat -= 1
-        @sleepCount = 0
-      end
     end
 
     if hungry?
@@ -173,7 +165,7 @@ class Cat
         @asleep = false
         puts @name + ' проснулся(ась).'
       end
-      puts 'У ' + @name + ' громко урчит в животе.'
+      puts 'У ' + @name + ' громко урчит живот.'
       @health -= 1
     end
 
@@ -231,11 +223,41 @@ class Cat
       end
       exit      
     end
-
+    randomAction if !@asleep
   end
 
-
+  def randomAction
+    r = rand(1..15)
+    case r
+      when 1
+        puts @name + ' запрыгнул(а) на кухонный стол и наступив на горячую плиту сделал(а) себе ожог :('
+        @health += rand(-3..-1)
+      when 2
+        puts @name + ' испортил(а) интернет провод.'
+        @mood += rand(0..1)
+      when 3
+        puts @name + ' перевернул(а) вазон на кухне.'
+        @dirty += rand(1..3)
+        @mood += rand(0..1)
+      when 4
+        puts @name + ' стало интерестно что находиться в банке с под огурцов, и он(а) там застрял(а).'
+        @mood -= 1
+        @dirty += rand(1..3)
+      when 5
+        puts @name + ' поцарапал(а) мебель.'
+        @mood += rand(0..1)
+      when 6
+        puts @name + ' вылез на улицу через форточку и пошел гулять.'
+        @eat    -=           2
+        @mood   += rand(-2..2)
+        @dirty  +=  rand(1..3)
+        @health += rand(-2..0)
+      end
+  end
 end
+
+
+
 
 puts 'Назовите своего питомца.'
 pet = Cat.new gets.chomp
