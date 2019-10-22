@@ -1,15 +1,12 @@
+# frozen_string_literal: true
 
 class Cat
   def initialize(name)
-    @name   = name.capitalize
-    @mood   = 10
-    @eat    = 10
-    @asleep = false
-    @wsleep =  0
-    @health = 10
-    @dirty  =  0
+    @name                           = name.capitalize
+    @mood = @eat = @health          = 10
+    @asleep                         = false
+    @wsleep = @sleep_count = @dirty = 0
     puts 'Ураа! Папа принес домой котенка, назовем его ' + @name + '.'
-    @sleepCount = 0
   end
 
   def help
@@ -63,12 +60,12 @@ class Cat
     if @asleep
       puts 'Вы смотрите как ' + @name + ' спит.'
     else
-      r = rand(1..3)
-      if r == 1
+      case rand(1..3)
+      when 1
         puts 'Вы наблюдаете за ожесточенной войной ' + @name + ' с Вашим тапочком.'
-      elsif r == 2
+      when 2
         puts 'Ищете ' + @name + ' взглядом и слышите шорох в шкафу.'
-      elsif r == 3
+      when 3
         puts 'Вы смотрите за тем, что делает ' + @name + '.'
       end
     end
@@ -107,7 +104,7 @@ class Cat
     end
   end
 
-  def wakeUp
+  def wake_up
     if @asleep
       @asleep = false
       puts 'Вы разбудили ' + @name + '.'
@@ -151,11 +148,11 @@ class Cat
     @eat -= 1
     @mood -= 1
 
-    if !@asleep
-      @wsleep += 1
-    else
+    if @asleep
       @wsleep -= 3
       puts @name + ' ритмично сопит.'
+    else
+      @wsleep += 1
     end
 
     if hungry?
@@ -191,8 +188,7 @@ class Cat
     end
 
     if @wsleep >= 8
-      r = rand(1..3)
-      if r == 1
+      if rand(1..3) == 1
         puts @name + ' упал(а) по среди комнаты и уснул(а).'
         @asleep = true
       else
@@ -217,12 +213,11 @@ class Cat
       puts '...которую заработал потому что был грязнулей.' if @dirty > 6
       exit
     end
-    randomAction unless @asleep
+    random_action unless @asleep
   end
 
-  def randomAction
-    r = rand(1..15)
-    case r
+  def random_action
+    case rand(15)
     when 1
       puts @name + ' запрыгнул(а) на кухонный стол и наступив на горячую плиту сделал(а) себе ожог :('
       @health += rand(-3..-1)
@@ -256,9 +251,7 @@ puts 'Напишите \'help\' чтобы получить список дос�
 puts
 
 loop do
-  command = gets.chomp
-
-  case command
+  case gets.chomp
   when 'rnm'
     pet.rename
   when 'help'
@@ -278,10 +271,9 @@ loop do
   when 's'
     pet.sleep
   when 'wu'
-    pet.wakeUp
+    pet.wake_up
   when 'e'
     exit
   end
   puts
-  command = ''
 end
