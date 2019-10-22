@@ -1,6 +1,6 @@
-class Cat
 
-  def initialize name
+class Cat
+  def initialize(name)
     @name   = name.capitalize
     @mood   = 10
     @eat    = 10
@@ -13,7 +13,7 @@ class Cat
   end
 
   def help
-    puts 
+    puts
     puts '***'
     puts 'command list:'
     puts 'hl - отвезти к ветеринару'
@@ -27,7 +27,7 @@ class Cat
     puts 'e - выйти'
     puts 'rnm - переименовать питомца'
     puts '***'
-    puts 
+    puts
   end
 
   def rename
@@ -57,7 +57,6 @@ class Cat
       puts 'Вы играете с ' + @name + ' '
       timeleft
     end
-    
   end
 
   def look
@@ -71,7 +70,7 @@ class Cat
         puts 'Ищете ' + @name + ' взглядом и слышите шорох в шкафу.'
       elsif r == 3
         puts 'Вы смотрите за тем, что делает ' + @name + '.'
-      end  
+      end
     end
     timeleft
   end
@@ -93,7 +92,7 @@ class Cat
     puts 'Вашего питомца зовут ' + @name
     puts @name + (@health >= 4 ? ' чувствует себя хорошо.' : ' выглядит подавлено.')
     puts @name + (@mood >= 5 ? ' доволен(на) жизнью.' : ' выглядит злым(ой)')
-    puts @name + (@eat > 5 ? ' сыт(а).'  : ' хочет есть.')
+    puts @name + (@eat > 5 ? ' сыт(а).' : ' хочет есть.')
     puts @name + (@asleep ? ' сейчас спит.' : (' выглядит ' + (@wsleep >= 6 ? 'сонно.' : 'бодро.')))
     puts '***'
   end
@@ -112,7 +111,7 @@ class Cat
     if @asleep
       @asleep = false
       puts 'Вы разбудили ' + @name + '.'
-      timeleft  
+      timeleft
     else
       puts @name + ' не спит.'
     end
@@ -137,7 +136,7 @@ class Cat
   end
 
   def dirty?
-    @dirty >= 4    
+    @dirty >= 4
   end
 
   def hungry?
@@ -149,14 +148,13 @@ class Cat
   end
 
   def timeleft
-    
     @eat -= 1
     @mood -= 1
 
     if !@asleep
       @wsleep += 1
     else
-     @wsleep -= 3
+      @wsleep -= 3
       puts @name + ' ритмично сопит.'
     end
 
@@ -201,7 +199,7 @@ class Cat
         puts 'Уставший(ая) ' + @name + ' пытаеться дойти до своего спального места.'
       end
     end
-    
+
     if @mood < 0
       puts 'Ваш питомец сбежал от вас в поисках приколючений :('
       exit
@@ -212,59 +210,52 @@ class Cat
       exit
     end
 
-    if @dirty >= 6
-        @health -= 2
-    end
+    @health -= 2 if @dirty >= 6
 
     if @health < 0
       puts 'Ваш питомец умер от болезни :('
-      if @dirty > 6
-        puts '...которую заработал потому что был грязнулей.'
-      end
-      exit      
+      puts '...которую заработал потому что был грязнулей.' if @dirty > 6
+      exit
     end
-    randomAction if !@asleep
+    randomAction unless @asleep
   end
 
   def randomAction
     r = rand(1..15)
     case r
-      when 1
-        puts @name + ' запрыгнул(а) на кухонный стол и наступив на горячую плиту сделал(а) себе ожог :('
-        @health += rand(-3..-1)
-      when 2
-        puts @name + ' испортил(а) интернет провод.'
-        @mood += rand(0..1)
-      when 3
-        puts @name + ' перевернул(а) вазон на кухне.'
-        @dirty += rand(1..3)
-        @mood += rand(0..1)
-      when 4
-        puts @name + ' стало интерестно что находиться в банке с под огурцов, и он(а) там застрял(а).'
-        @mood -= 1
-        @dirty += rand(1..3)
-      when 5
-        puts @name + ' поцарапал(а) мебель.'
-        @mood += rand(0..1)
-      when 6
-        puts @name + ' вылез на улицу через форточку и пошел гулять.'
-        @eat    -=           2
-        @mood   += rand(-2..2)
-        @dirty  +=  rand(1..3)
-        @health += rand(-2..0)
+    when 1
+      puts @name + ' запрыгнул(а) на кухонный стол и наступив на горячую плиту сделал(а) себе ожог :('
+      @health += rand(-3..-1)
+    when 2
+      puts @name + ' испортил(а) интернет провод.'
+      @mood += rand(0..1)
+    when 3
+      puts @name + ' перевернул(а) вазон на кухне.'
+      @dirty += rand(1..3)
+      @mood += rand(0..1)
+    when 4
+      puts @name + ' стало интерестно что находиться в банке с под огурцов, и он(а) там застрял(а).'
+      @mood -= 1
+      @dirty += rand(1..3)
+    when 5
+      puts @name + ' поцарапал(а) мебель.'
+      @mood += rand(0..1)
+    when 6
+      puts @name + ' вылез на улицу через форточку и пошел гулять.'
+      @eat -= 2
+      @mood += rand(-2..2)
+      @dirty += rand(1..3)
+      @health += rand(-2..0)
       end
   end
 end
 
-
-
-
 puts 'Назовите своего питомца.'
 pet = Cat.new gets.chomp
 puts 'Напишите \'help\' чтобы получить список доступный команд.'
-puts 
+puts
 
-while 1
+loop do
   command = gets.chomp
 
   case command
