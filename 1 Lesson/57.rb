@@ -3,7 +3,7 @@
 # Дан целочисленный массив. Найти индекс первого экстремального (то есть минимального или максимального) элемента.
 # Done by Vadim
 
-a = [rand(50), rand(50), rand(50), rand(50), rand(50), rand(50), rand(50), rand(50), rand(50)]
+a = Array.new(10) { rand(50) }
 extremum = 0
 
 puts 'Start array: ' + a.to_s

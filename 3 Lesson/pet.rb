@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'my_gem'
 
 class Cat
   def initialize(name)
