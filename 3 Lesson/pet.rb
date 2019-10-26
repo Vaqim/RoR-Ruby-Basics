@@ -7,6 +7,7 @@ class Cat
     @mood = @eat = @health          = 10
     @asleep                         = false
     @wsleep = @sleep_count = @dirty = 0
+    @f = MyGem.new
     puts 'Ураа! Папа принес домой котенка, назовем его ' + @name + '.'
   end
 
@@ -215,6 +216,16 @@ class Cat
       exit
     end
     random_action unless @asleep
+
+    
+
+    @f.mood   = @name
+    @f.name   = @mood
+    @f.eat    = @eat
+    @f.health = @health
+    @f.wsleep = @wsleep
+    @f.dirty  = @dirty
+    f.html_creator
   end
 
   def random_action
