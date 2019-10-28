@@ -1,5 +1,7 @@
 # frozen_string_literal: true
-require 'my_gem'
+require 'bundler'
+Bundler.require
+
 
 class Cat
   def initialize(name)
@@ -7,8 +9,8 @@ class Cat
     @mood = @eat = @health          = 10
     @asleep                         = false
     @wsleep = @sleep_count = @dirty = 0
-    @f = MyGem.new
     puts 'Ураа! Папа принес домой котенка, назовем его ' + @name + '.'
+    help
   end
 
   def help
@@ -217,15 +219,7 @@ class Cat
     end
     random_action unless @asleep
 
-    
-
-    @f.mood   = @name
-    @f.name   = @mood
-    @f.eat    = @eat
-    @f.health = @health
-    @f.wsleep = @wsleep
-    @f.dirty  = @dirty
-    f.html_creator
+    HtmlWriter.write('stats')
   end
 
   def random_action
