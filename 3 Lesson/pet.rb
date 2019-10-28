@@ -19,7 +19,6 @@ class Cat
     puts 'command list:'
     puts 'hl - отвезти к ветеринару'
     puts 'wsh - искупать(помыть) питомца'
-    puts 'st - инофрмация о питомце'
     puts 'l - смотреть за питомцем'
     puts 'fd - дать питомцу еды'
     puts 'pl - поиграть с питомцем'
@@ -89,13 +88,11 @@ class Cat
   end
 
   def status
-    puts '***'
-    puts 'Вашего питомца зовут ' + @name
-    puts @name + (@health >= 4 ? ' чувствует себя хорошо.' : ' выглядит подавлено.')
-    puts @name + (@mood >= 5 ? ' доволен(на) жизнью.' : ' выглядит злым(ой)')
-    puts @name + (@eat > 5 ? ' сыт(а).' : ' хочет есть.')
-    puts @name + (@asleep ? ' сейчас спит.' : (' выглядит ' + (@wsleep >= 6 ? 'сонно.' : 'бодро.')))
-    puts '***'
+    'Вашего питомца зовут ' + @name + '<br/>' +
+    @name + (@health >= 4 ? ' чувствует себя хорошо.' : ' выглядит подавлено.') + '<br/>' +
+    @name + (@mood >= 5 ? ' доволен(на) жизнью.' : ' выглядит злым(ой)') + '<br/>' +
+    @name + (@eat > 5 ? ' сыт(а).' : ' хочет есть.') + '<br/>' +
+    @name + (@asleep ? ' сейчас спит.' : (' выглядит ' + (@wsleep >= 6 ? 'сонно.' : 'бодро.')))
   end
 
   def wash
@@ -219,7 +216,7 @@ class Cat
     end
     random_action unless @asleep
 
-    HtmlWriter.write('stats')
+    HtmlWriter.write(status, bypass_html: true)
   end
 
   def random_action
