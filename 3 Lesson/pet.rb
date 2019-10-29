@@ -199,11 +199,13 @@ class Cat
 
     if @mood < 0
       puts 'Ваш питомец сбежал от вас в поисках приколючений :('
+      HtmlWriter.write((@name + ' escaped from you &#10060;'), bypass_html: true)
       exit
     end
 
     if @eat < 0
       puts 'Ваш питомец умер от голода :('
+      HtmlWriter.write((@name + ' dead. &#128128;'), bypass_html: true)
       exit
     end
 
@@ -212,6 +214,7 @@ class Cat
     if @health < 0
       puts 'Ваш питомец умер от болезни :('
       puts '...которую заработал потому что был грязнулей.' if @dirty > 6
+      HtmlWriter.write((@name + ' dead. &#128128;'), bypass_html: true)
       exit
     end
     random_action unless @asleep
