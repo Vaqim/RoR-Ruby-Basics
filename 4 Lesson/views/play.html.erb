@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Play</title>
+</head>
+<body>
+	<h1>Status</h1>
+	<p>
+		<%= pet.status %>
+	</p>
+
+		<% pet.comment.each do |comment| %>
+		<p>
+		<%= comment %>
+		</p>
+
+		<% end %> 
+
+	<div>
+		<form method="post" action="/actions/<%= params['index'] %>">
+			<button value="play" type="submit" name="action_type">Play</button>
+			<button value="sleep" type="submit" name="action_type">Sleep</button>
+			<button value="wake_up" type="submit" name="action_type">Wake up</button>
+			<button value="eat" type="submit" name="action_type">Eat</button>
+			<button value="look" type="submit" name="action_type">Look</button>
+			<button value="wash" type="submit" name="action_type">Wash</button>
+			<button value="heal" type="submit" name="action_type">Heal</button>
+		</form>
+
+		<form action="/rename/<%= params['index'] %>" method="post">
+			<input type="text" name="name" value="<%= pet.name %>">
+			<input type="submit" value="Rename">
+		</form>
+
+
+	</div>
+	
+</body>
+</html>
