@@ -11,11 +11,13 @@ GEM
   remote: https://rubygems.org/
   specs:
     crass (1.0.5)
-    mini_portile2 (2.4.0)
-    nokogiri (1.10.4)
-      mini_portile2 (~> 2.4.0)
+    mini_portile2 (2.8.0)
+    nokogiri (1.13.9)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     nokogumbo (2.0.1)
       nokogiri (~> 1.8, >= 1.8.4)
+    racc (1.6.0)
     sanitize (5.1.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.8.0)
